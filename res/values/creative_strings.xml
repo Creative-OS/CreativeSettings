@@ -18,7 +18,9 @@
 
     <!-- App Title -->
     <string name="creative_customizations_title">Customizations</string>
-    <string name="creative_customizations_summary">Themes, Accent Color, font</string>
+    <string name="creative_customizations_summary">System modifications</string>
+    <string name="creative_kitchen_title">The Kitchen</string>
+    <string name="creative_kitchen_summary">Explore android system modifications made by the opensource community</string>
     <string name="reset_settings_title">Reset settings</string>
     <string name="reset_settings_message">This will reset most creative settings to their default values for the current user. Would you like to continue?</string>
 

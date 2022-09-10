@@ -31,6 +31,7 @@
         <!-- About -->
         <Preference
             android:icon="@drawable/ic_settings_about"
+            settings:layout="@layout/arc_card_about"
             android:title="@string/about_settings_title"
             android:summary="@string/about_settings_summary"
             android:fragment="com.creative.settings.fragments.About" />
@@ -38,8 +39,9 @@
         <!-- UserInterface -->
         <Preference
             android:icon="@drawable/ic_settings_ui"
-            android:title="@string/ui_settings_title"
-            android:summary="@string/ui_settings_summary"
+            settings:layout="@layout/arc_card_about"
+            android:title="@string/creative_kitchen_title"
+            android:summary="@string/creative_kitchen_summary"
             android:fragment="com.creative.settings.fragments.Customizations" />
 
 </PreferenceScreen> 
