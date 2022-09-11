@@ -495,7 +495,6 @@
     <string name="network_traffic_mode_down">Download only</string>
     <string name="network_traffic_mode_all">Upload and download</string>
     <string name="network_traffic_autohide">Auto hide</string>
-    <string name="network_traffic_autohide_summary">Hide the traffic monitor when inactive</string>
     <string name="network_traffic_autohide_kilobits">Kb/s</string>
     <string name="network_traffic_autohide_kilobytes">KB/s</string>
     <string name="network_traffic_autohide_threshold">Inactivity threshold</string>
@@ -1269,4 +1268,12 @@
     <!-- Toast app icon -->
     <string name="toast_icon_title">Toast app icon</string>
     <string name="toast_icon_summary">Display the app\'s icon corresponding with the toast</string>
+    
+    <!-- Network traffic -->
+    <string name="network_traffic_title">Network traffic indicator</string>
+    <string name="network_traffic_summary">Enable or disable network speed indicator in status bar</string>
+    <string name="network_traffic_master_switch_title">Use Network Traffic Indicator</string>
+    <string name="network_options_title">Options</string>
+    <string name="network_traffic_autohide_title">Hide network traffic indicator if inactive</string>
+    <string name="network_traffic_autohide_summary">Hide when network traffic indicator is below 1 KB/s</string>
 </resources>
