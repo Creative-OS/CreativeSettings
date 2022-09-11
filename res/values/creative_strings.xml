@@ -178,8 +178,8 @@
     <string name="lockscreen_charge_temp_unit_summary">Enable for Celcius, disable for Fahrenheit</string>
 
     <!-- Lockscreen clock color -->
-    <string name="lockscreen_clock_color_title">Lockscreen clock color</string>
-    <string name="lockscreen_clock_color_summary">Use secondary color for lockscreen clock (requires reboot)</string>
+    <string name="lockscreen_clock_color_title">Lockscreen Clock color</string>
+    <string name="lockscreen_clock_color_summary">Use white/black-ish instead color accent</string>
     
     <!-- Button settings -->
     <string name="additional_buttons_title">Additional buttons</string>
