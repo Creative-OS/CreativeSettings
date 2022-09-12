@@ -49,6 +49,19 @@
         android:summary="@string/theme_customization_font_summary"
         android:fragment="com.creative.settings.fragments.ui.FontsPicker"/>
 
+    <!-- Gaming mode -->
+    <Preference
+        android:key="gaming_mode"
+        android:icon="@drawable/ic_gaming"
+        android:title="@string/gaming_mode_title"
+        android:summary="@string/gaming_mode_summary">
+
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="io.chaldeaprjkt.gamespace"
+            android:targetClass="io.chaldeaprjkt.gamespace.settings.SettingsActivity" />
+    </Preference>
+
     <!-- Icon pack -->
     <Preference
         android:key="android.theme.customization.icon_pack"
