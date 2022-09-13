@@ -130,6 +130,13 @@
         android:summary="@string/theme_customization_signal_icon_summary"
         android:fragment="com.creative.settings.fragments.ui.SignalIcons"/>
 
+    <com.creative.settings.preferences.SystemSettingSwitchPreference
+        android:key="status_bar_brightness_control"
+        android:icon="@drawable/ic_brightness_auto"
+        android:title="@string/status_bar_toggle_brightness_title"
+        android:summary="@string/status_bar_toggle_brightness_summary"
+        android:defaultValue="false" />
+
     <!-- Adaptive icon pack -->
     <Preference
         android:key="android.theme.customization.adaptive_icon_shape"
