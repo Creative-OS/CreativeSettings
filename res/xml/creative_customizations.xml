@@ -131,6 +131,13 @@
         android:summary="@string/status_bar_toggle_brightness_summary"
         android:defaultValue="false" />
 
+    <com.creative.settings.preferences.SystemSettingSwitchPreference
+        android:key="statusbar_colored_icons"
+        android:icon="@drawable/ic_shapes"
+        android:title="@string/statusbar_colored_icons_title"
+        android:summary="@string/statusbar_colored_icons_summary"
+        android:defaultValue="false" />
+
     <Preference
         android:key="network_traffic_settings"
         android:icon="@drawable/ic_fourg"
