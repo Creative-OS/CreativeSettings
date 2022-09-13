@@ -18,7 +18,7 @@
 
     <!-- App Title -->
     <string name="creative_customizations_title">Customizations</string>
-    <string name="creative_customizations_summary">System modifications</string>
+    <string name="creative_customizations_summary">Themes, status bar icons, notifications</string>
     <string name="creative_kitchen_title">The Kitchen</string>
     <string name="creative_kitchen_summary">Explore android system modifications made by the opensource community</string>
     <string name="reset_settings_title">Reset settings</string>
@@ -1044,8 +1044,8 @@
     <string name="media_category">Media notification</string>
     <string name="artwork_media_background_title">Artwork media background</string>
     <string name="artwork_media_background_summary">Set media artwork as the notification media background</string>
-    <string name="artwork_media_background_enable_blur_title">Blur media media artwork background</string>
-    <string name="artwork_media_background_blur_radius_title">Blur amount for media artwork</string>
+    <string name="artwork_media_background_enable_blur_title">Blur media media notification artwork background</string>
+    <string name="artwork_media_background_blur_radius_title">Blur amount for media notification artwork</string>
     <string name="artwork_media_background_fade_filter_title">Fade amount for media artwork</string>
     <string name="artwork_media_background_alpha_title">Transparency of media artwork</string>
     <string name="just_kidding">Just kidding! providing logs helps us look like professional programmers err i mean trace the bugs that users reports.</string>
