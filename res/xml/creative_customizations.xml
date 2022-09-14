@@ -31,6 +31,13 @@
         android:defaultValue="true" />
 
     <com.creative.settings.preferences.SystemSettingSwitchPreference
+        android:key="lockscreen_charge_temp_unit"
+        android:icon="@drawable/ic_battery"
+        android:title="@string/lockscreen_charge_temp_unit_title"
+        android:summary="@string/lockscreen_charge_temp_unit_summary"
+        android:defaultValue="true" />
+            
+    <com.creative.settings.preferences.SystemSettingSwitchPreference
         android:key="use_secondary_color_clock"
         android:icon="@drawable/ic_lock_clock"
         android:title="@string/lockscreen_clock_color_title"
