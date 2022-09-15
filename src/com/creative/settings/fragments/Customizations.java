@@ -19,15 +19,20 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.view.View;
 import android.text.TextUtils;
 
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.SwitchPreference;
@@ -38,10 +43,20 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
+import com.creative.settings.fragments.statusbar.Clock;
+import com.creative.settings.preferences.CustomSeekBarPreference;
 import com.creative.settings.preferences.SystemSettingListPreference;
 import com.creative.settings.preferences.SystemSettingSwitchPreference;
+import com.creative.settings.utils.DeviceUtils;
+import com.creative.settings.utils.TelephonyUtils;
+
+import lineageos.preference.LineageSystemSettingListPreference;
+import lineageos.preference.LineageSecureSettingListPreference;
+import lineageos.preference.LineageSecureSettingSwitchPreference;
+import lineageos.providers.LineageSettings;
 
 import java.util.List;
+import java.util.ArrayList;
 
 @SearchIndexable
 public class Customizations extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
@@ -49,8 +64,37 @@ public class Customizations extends SettingsPreferenceFragment implements OnPref
     public static final String TAG = "Customizations";
     
     private static final String ALERT_SLIDER_PREF = "alert_slider_notifications";
-    
-    private Preference mAlertSlider;
+    private static final String KEY_SHOW_BRIGHTNESS_SLIDER = "qs_show_brightness_slider";
+    private static final String KEY_BRIGHTNESS_SLIDER_POSITION = "qs_brightness_slider_position";
+    private static final String KEY_SHOW_AUTO_BRIGHTNESS = "qs_show_auto_brightness";
+    private static final String STATUS_BAR_CLOCK_STYLE = "status_bar_clock";
+    private static final String QUICK_PULLDOWN = "qs_quick_pulldown";
+    private static final String KEY_SHOW_FOURG = "show_fourg_icon";
+    private static final String KEY_USE_OLD_MOBILETYPE = "use_old_mobiletype";
+    private static final String KEY_STATUS_BAR_SHOW_BATTERY_PERCENT = "status_bar_show_battery_percent";
+    private static final String KEY_STATUS_BAR_BATTERY_STYLE = "status_bar_battery_style";
+    private static final String KEY_STATUS_BAR_BATTERY_TEXT_CHARGING = "status_bar_battery_text_charging";
+
+    private static final int PULLDOWN_DIR_NONE = 0;
+    private static final int PULLDOWN_DIR_RIGHT = 1;
+    private static final int PULLDOWN_DIR_LEFT = 2;
+    private static final int PULLDOWN_DIR_ALWAYS = 3;
+
+    private static final int BATTERY_STYLE_PORTRAIT = 0;
+    private static final int BATTERY_STYLE_TEXT = 4;
+    private static final int BATTERY_STYLE_HIDDEN = 5;
+
+    private LineageSecureSettingListPreference mShowBrightnessSlider;
+    private LineageSecureSettingListPreference mBrightnessSliderPosition;
+    private LineageSecureSettingSwitchPreference mShowAutoBrightness;
+    private LineageSystemSettingListPreference mStatusBarClock;
+    private LineageSystemSettingListPreference mQuickPulldown;
+    private SystemSettingListPreference mBatteryPercent;
+    private SystemSettingListPreference mBatteryStyle;
+    private SystemSettingSwitchPreference mShowFourg;
+    private SystemSettingSwitchPreference mOldMobileType;
+    private SystemSettingSwitchPreference mBatteryTextCharging;
+    private SystemSettingSwitchPreference mAlertSlider;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,12 +102,68 @@ public class Customizations extends SettingsPreferenceFragment implements OnPref
 
         addPreferencesFromResource(R.xml.creative_customizations);
 
+	Context mContext = getActivity().getApplicationContext();
+	ContentResolver resolver = mContext.getContentResolver();
         final PreferenceScreen prefScreen = getPreferenceScreen();
-        final Context mContext = getActivity().getApplicationContext();
-        final ContentResolver resolver = mContext.getContentResolver();
         final Resources res = mContext.getResources();
 
-        mAlertSlider = (Preference) prefScreen.findPreference(ALERT_SLIDER_PREF);
+        mShowBrightnessSlider =
+                (LineageSecureSettingListPreference) findPreference(KEY_SHOW_BRIGHTNESS_SLIDER);
+        mShowBrightnessSlider.setOnPreferenceChangeListener(this);
+        boolean showSlider = LineageSettings.Secure.getIntForUser(resolver,
+                LineageSettings.Secure.QS_SHOW_BRIGHTNESS_SLIDER, 1, UserHandle.USER_CURRENT) > 0;
+
+        mBrightnessSliderPosition =
+                (LineageSecureSettingListPreference) findPreference(KEY_BRIGHTNESS_SLIDER_POSITION);
+        mBrightnessSliderPosition.setEnabled(showSlider);
+
+        mShowAutoBrightness =
+                (LineageSecureSettingSwitchPreference) findPreference(KEY_SHOW_AUTO_BRIGHTNESS);
+        boolean automaticAvailable = res.getBoolean(
+                com.android.internal.R.bool.config_automatic_brightness_available);
+        if (automaticAvailable) {
+            mShowAutoBrightness.setEnabled(showSlider);
+        } else {
+            prefScreen.removePreference(mShowAutoBrightness);
+        }
+
+        mStatusBarClock =
+                (LineageSystemSettingListPreference) findPreference(STATUS_BAR_CLOCK_STYLE);
+
+        // Adjust status bar preferences for RTL
+        if (getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
+            if (DeviceUtils.hasCenteredCutout(mContext)) {
+                mStatusBarClock.setEntries(R.array.status_bar_clock_position_entries_notch_rtl);
+                mStatusBarClock.setEntryValues(R.array.status_bar_clock_position_values_notch_rtl);
+            } else {
+                mStatusBarClock.setEntries(R.array.status_bar_clock_position_entries_rtl);
+                mStatusBarClock.setEntryValues(R.array.status_bar_clock_position_values_rtl);
+            }
+        } else if (DeviceUtils.hasCenteredCutout(mContext)) {
+            mStatusBarClock.setEntries(R.array.status_bar_clock_position_entries_notch);
+            mStatusBarClock.setEntryValues(R.array.status_bar_clock_position_values_notch);
+        }
+
+        mShowFourg = (SystemSettingSwitchPreference) findPreference(KEY_SHOW_FOURG);
+        mOldMobileType = (SystemSettingSwitchPreference) findPreference(KEY_USE_OLD_MOBILETYPE);
+
+        if (!TelephonyUtils.isVoiceCapable(getActivity())) {
+            prefScreen.removePreference(mShowFourg);
+            prefScreen.removePreference(mOldMobileType);
+        }
+
+        mQuickPulldown =
+                (LineageSystemSettingListPreference) findPreference(QUICK_PULLDOWN);
+        mQuickPulldown.setOnPreferenceChangeListener(this);
+        updateQuickPulldownSummary(mQuickPulldown.getIntValue(0));
+
+        // Adjust status bar preferences for RTL
+        if (getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
+            mQuickPulldown.setEntries(R.array.status_bar_quick_qs_pulldown_entries_rtl);
+            mQuickPulldown.setEntryValues(R.array.status_bar_quick_qs_pulldown_values_rtl);
+        }
+
+        mAlertSlider = (SystemSettingSwitchPreference) prefScreen.findPreference(ALERT_SLIDER_PREF);
         boolean mAlertSliderAvailable = res.getBoolean(
                 com.android.internal.R.bool.config_hasAlertSlider);
         if (!mAlertSliderAvailable)
@@ -73,7 +173,41 @@ public class Customizations extends SettingsPreferenceFragment implements OnPref
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (preference == mShowBrightnessSlider) {
+            int value = Integer.parseInt((String) newValue);
+            mBrightnessSliderPosition.setEnabled(value > 0);
+            if (mShowAutoBrightness != null)
+                mShowAutoBrightness.setEnabled(value > 0);
+            return true;
+        } else if (preference == mQuickPulldown) {
+            int value = Integer.parseInt((String) newValue);
+            updateQuickPulldownSummary(value);
+            return true;
+        }
         return false;
+    }
+
+    private void updateQuickPulldownSummary(int value) {
+        String summary="";
+        switch (value) {
+            case PULLDOWN_DIR_NONE:
+                summary = getResources().getString(
+                    R.string.status_bar_quick_qs_pulldown_off);
+                break;
+            case PULLDOWN_DIR_ALWAYS:
+                summary = getResources().getString(
+                    R.string.status_bar_quick_qs_pulldown_always);
+                break;
+            case PULLDOWN_DIR_LEFT:
+            case PULLDOWN_DIR_RIGHT:
+                summary = getResources().getString(
+                    R.string.status_bar_quick_qs_pulldown_summary,
+                    getResources().getString(value == PULLDOWN_DIR_LEFT
+                        ? R.string.status_bar_quick_qs_pulldown_summary_left
+                        : R.string.status_bar_quick_qs_pulldown_summary_right));
+                break;
+        }
+        mQuickPulldown.setSummary(summary);
     }
 
     @Override
@@ -94,8 +228,15 @@ public class Customizations extends SettingsPreferenceFragment implements OnPref
 
                     boolean mAlertSliderAvailable = res.getBoolean(
                             com.android.internal.R.bool.config_hasAlertSlider);
+                            
+                    if (!TelephonyUtils.isVoiceCapable(context)) {
+                        keys.add(KEY_SHOW_FOURG);
+                        keys.add(KEY_USE_OLD_MOBILETYPE);
+                    }
+
                     if (!mAlertSliderAvailable)
                         keys.add(ALERT_SLIDER_PREF);
+
                     return keys;
 
                 }
