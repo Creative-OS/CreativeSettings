@@ -28,6 +28,14 @@
      </PreferenceCategory>
 
     <PreferenceCategory
+         android:title="@string/what_is_rise" >
+
+    <Preference
+    	 android:summary="@string/what_is_rise_summary" />
+
+     </PreferenceCategory>
+
+    <PreferenceCategory
          android:title="@string/creative_terminology" >
 
     <Preference

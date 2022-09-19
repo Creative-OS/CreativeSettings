@@ -68,9 +68,11 @@
     <string name="changelog_creative_summary">View changes in the ROM installed</string>
     <string name="changelog_creative_error">Unable to load changelog</string>
     <string name="what_is_creative">What is CreativeOS?</string>
-    <string name="what_is_creative_summary">CreativeOS is an operating system based on lineage/riceDroid/crDroid, that aims to provide as much &quot;cutomization&quot; for android while being fast and stable.</string>
+    <string name="what_is_creative_summary">CreativeOS is an organization that maintains the creativeDroid android project.</string>
+    <string name="what_is_rise">What is CreativeDesigns?</string>
+    <string name="what_is_rise_summary">CreativeDesigns is an opensource android operating system that aims to bring the necessary system modifications while being neat, stable and fast.</string>
     <string name="creative_terminology">Terminology</string>
-    <string name="creative_terminology_summary">To Be Updated.</string>
+    <string name="creative_terminology_summary">To be Updated</string>
 
     <!-- About CreativeOS -->
     <string name="about_creative">About CreativeOS</string>
