@@ -1279,4 +1279,11 @@
     <string name="network_traffic_autohide_summary">Hide when network traffic indicator is below 1 KB/s</string>
     
     <string name="theme_customization_category">Theming</string>
+    
+    <!-- Quick settings styling -->
+    <string name="qs_styling">Quick Settings UI</string>
+    <string name="qs_styles_title">QS Panel Styles</string>
+    <string name="qs_outline">QS Outline Style</string>
+    <string name="qs_two_tone">QS Two-Tone Accent</string>
+    <string name="qs_color_pop">QS Color Pop</string>
 </resources>

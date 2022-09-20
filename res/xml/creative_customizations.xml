@@ -311,6 +311,17 @@
         android:entryValues="@array/status_bar_quick_qs_pulldown_values"
         android:defaultValue="0" />
 
+    <!-- QS style -->
+    <com.creative.settings.preferences.SystemSettingListPreference
+         android:key="qs_panel_style"
+         android:icon="@drawable/ic_color_bucket"
+         android:title="@string/qs_styles_title"
+         android:dialogTitle="@string/qs_styles_title"
+         android:entries="@array/qs_styles_entries"
+         android:entryValues="@array/qs_styles_values"
+         android:summary="%s"
+         android:defaultValue="0" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
