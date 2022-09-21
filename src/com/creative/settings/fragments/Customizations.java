@@ -43,6 +43,7 @@ import android.text.TextUtils;
 
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.SwitchPreference;
@@ -79,8 +80,6 @@ public class Customizations extends SettingsPreferenceFragment implements OnPref
     private static final String KEY_SHOW_AUTO_BRIGHTNESS = "qs_show_auto_brightness";
     private static final String STATUS_BAR_CLOCK_STYLE = "status_bar_clock";
     private static final String QUICK_PULLDOWN = "qs_quick_pulldown";
-    private static final String KEY_SHOW_FOURG = "show_fourg_icon";
-    private static final String KEY_USE_OLD_MOBILETYPE = "use_old_mobiletype";
     private static final String KEY_STATUS_BAR_SHOW_BATTERY_PERCENT = "status_bar_show_battery_percent";
     private static final String KEY_STATUS_BAR_BATTERY_STYLE = "status_bar_battery_style";
     private static final String KEY_STATUS_BAR_BATTERY_TEXT_CHARGING = "status_bar_battery_text_charging";
@@ -97,12 +96,16 @@ public class Customizations extends SettingsPreferenceFragment implements OnPref
     private static final int BATTERY_STYLE_PORTRAIT = 0;
     private static final int BATTERY_STYLE_TEXT = 4;
     private static final int BATTERY_STYLE_HIDDEN = 5;
+    
+    private boolean mAlertSliderSupported;
+    private boolean mSmartChargingSupported;
+    private boolean mPocketJudgeSupported;
 
     private Handler mHandler;
     private IOverlayManager mOverlayManager;
     private IOverlayManager mOverlayService;
     private Preference mSmartCharging;
-    private Preference mPocketJudge;
+    private SystemSettingSwitchPreference mPocketJudge;
     private SystemSettingListPreference mQsStyle;
     private LineageSecureSettingListPreference mShowBrightnessSlider;
     private LineageSecureSettingListPreference mBrightnessSliderPosition;
@@ -125,19 +128,6 @@ public class Customizations extends SettingsPreferenceFragment implements OnPref
 	Context mContext = getActivity().getApplicationContext();
 	ContentResolver resolver = mContext.getContentResolver();
         final PreferenceScreen prefScreen = getPreferenceScreen();
-        final Resources res = mContext.getResources();
-
-        mSmartCharging = (Preference) prefScreen.findPreference(SMART_CHARGING);
-        boolean mSmartChargingSupported = res.getBoolean(
-                com.android.internal.R.bool.config_smartChargingAvailable);
-        if (!mSmartChargingSupported)
-            prefScreen.removePreference(mSmartCharging);
-
-        mPocketJudge = (Preference) prefScreen.findPreference(POCKET_JUDGE);
-        boolean mPocketJudgeSupported = res.getBoolean(
-                com.android.internal.R.bool.config_pocketModeSupported);
-        if (!mPocketJudgeSupported)
-            prefScreen.removePreference(mPocketJudge);
 
         mShowBrightnessSlider =
                 (LineageSecureSettingListPreference) findPreference(KEY_SHOW_BRIGHTNESS_SLIDER);
@@ -151,13 +141,7 @@ public class Customizations extends SettingsPreferenceFragment implements OnPref
 
         mShowAutoBrightness =
                 (LineageSecureSettingSwitchPreference) findPreference(KEY_SHOW_AUTO_BRIGHTNESS);
-        boolean automaticAvailable = res.getBoolean(
-                com.android.internal.R.bool.config_automatic_brightness_available);
-        if (automaticAvailable) {
             mShowAutoBrightness.setEnabled(showSlider);
-        } else {
-            prefScreen.removePreference(mShowAutoBrightness);
-        }
 
         mStatusBarClock =
                 (LineageSystemSettingListPreference) findPreference(STATUS_BAR_CLOCK_STYLE);
@@ -174,14 +158,6 @@ public class Customizations extends SettingsPreferenceFragment implements OnPref
         } else if (DeviceUtils.hasCenteredCutout(mContext)) {
             mStatusBarClock.setEntries(R.array.status_bar_clock_position_entries_notch);
             mStatusBarClock.setEntryValues(R.array.status_bar_clock_position_values_notch);
-        }
-
-        mShowFourg = (SystemSettingSwitchPreference) findPreference(KEY_SHOW_FOURG);
-        mOldMobileType = (SystemSettingSwitchPreference) findPreference(KEY_USE_OLD_MOBILETYPE);
-
-        if (!TelephonyUtils.isVoiceCapable(getActivity())) {
-            prefScreen.removePreference(mShowFourg);
-            prefScreen.removePreference(mOldMobileType);
         }
 
         mQuickPulldown =
@@ -201,11 +177,7 @@ public class Customizations extends SettingsPreferenceFragment implements OnPref
         mQsStyle = (SystemSettingListPreference) findPreference(QS_PANEL_STYLE);
         mCustomSettingsObserver.observe();
 
-        mAlertSlider = (SystemSettingSwitchPreference) prefScreen.findPreference(ALERT_SLIDER_PREF);
-        boolean mAlertSliderAvailable = res.getBoolean(
-                com.android.internal.R.bool.config_hasAlertSlider);
-        if (!mAlertSliderAvailable)
-            prefScreen.removePreference(mAlertSlider);
+	checkIfPreferenceIsSupported();
     }
 
     private CustomSettingsObserver mCustomSettingsObserver = new CustomSettingsObserver(mHandler);
@@ -248,6 +220,34 @@ public class Customizations extends SettingsPreferenceFragment implements OnPref
             return true;
         }
         return false;
+    }
+
+    private void checkIfPreferenceIsSupported() {
+	final PreferenceScreen prefScreen = getPreferenceScreen();   
+
+	final PreferenceCategory perfCatAS = (PreferenceCategory) prefScreen
+                .findPreference("alert_slider_category");
+
+	final PreferenceCategory perfCatSM = (PreferenceCategory) prefScreen
+                .findPreference("smart_charging_category");
+
+	final PreferenceCategory perfCatPJ = (PreferenceCategory) prefScreen
+                .findPreference("pocket_judge_category");
+
+        mAlertSliderSupported = getResources().getBoolean(
+                com.android.internal.R.bool.config_hasAlertSlider);         
+        mSmartChargingSupported = getResources().getBoolean(
+                com.android.internal.R.bool.config_smartChargingAvailable);
+        mPocketJudgeSupported = getResources().getBoolean(
+                com.android.internal.R.bool.config_pocketModeSupported);
+         
+        if (!mAlertSliderSupported) {
+           prefScreen.removePreference(perfCatAS);
+        } else if (!mSmartChargingSupported) {
+            prefScreen.removePreference(perfCatSM);
+        } else if (!mPocketJudgeSupported) {
+            prefScreen.removePreference(perfCatPJ);
+        }
     }
 
     private void updateQsStyle() {
@@ -334,30 +334,6 @@ public class Customizations extends SettingsPreferenceFragment implements OnPref
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> keys = super.getNonIndexableKeys(context);
-                   final Resources res = context.getResources();
-
-                    boolean mAlertSliderAvailable = res.getBoolean(
-                            com.android.internal.R.bool.config_hasAlertSlider);
-                            
-                    boolean mSmartChargingSupported = res.getBoolean(
-                            com.android.internal.R.bool.config_smartChargingAvailable);
-
-                    boolean mPocketJudgeSupported = res.getBoolean(
-                            com.android.internal.R.bool.config_pocketModeSupported);
-
-                    if (!TelephonyUtils.isVoiceCapable(context)) {
-                        keys.add(KEY_SHOW_FOURG);
-                        keys.add(KEY_USE_OLD_MOBILETYPE);
-                    }
-
-                    if (!mAlertSliderAvailable)
-                        keys.add(ALERT_SLIDER_PREF);
-
-                    if (!mSmartChargingSupported)
-                        keys.add(SMART_CHARGING);
-
-                    if (!mPocketJudgeSupported)
-                        keys.add(POCKET_JUDGE);
 
                     return keys;
 
