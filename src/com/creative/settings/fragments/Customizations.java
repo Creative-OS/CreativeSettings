@@ -85,6 +85,7 @@ public class Customizations extends SettingsPreferenceFragment implements OnPref
     private static final String KEY_STATUS_BAR_BATTERY_STYLE = "status_bar_battery_style";
     private static final String KEY_STATUS_BAR_BATTERY_TEXT_CHARGING = "status_bar_battery_text_charging";
     private static final String SMART_CHARGING = "smart_charging";
+    private static final String POCKET_JUDGE = "pocket_judge";
 
     private static final String QS_PANEL_STYLE  = "qs_panel_style";
 
@@ -101,6 +102,7 @@ public class Customizations extends SettingsPreferenceFragment implements OnPref
     private IOverlayManager mOverlayManager;
     private IOverlayManager mOverlayService;
     private Preference mSmartCharging;
+    private Preference mPocketJudge;
     private SystemSettingListPreference mQsStyle;
     private LineageSecureSettingListPreference mShowBrightnessSlider;
     private LineageSecureSettingListPreference mBrightnessSliderPosition;
@@ -130,6 +132,12 @@ public class Customizations extends SettingsPreferenceFragment implements OnPref
                 com.android.internal.R.bool.config_smartChargingAvailable);
         if (!mSmartChargingSupported)
             prefScreen.removePreference(mSmartCharging);
+
+        mPocketJudge = (Preference) prefScreen.findPreference(POCKET_JUDGE);
+        boolean mPocketJudgeSupported = res.getBoolean(
+                com.android.internal.R.bool.config_pocketModeSupported);
+        if (!mPocketJudgeSupported)
+            prefScreen.removePreference(mPocketJudge);
 
         mShowBrightnessSlider =
                 (LineageSecureSettingListPreference) findPreference(KEY_SHOW_BRIGHTNESS_SLIDER);
@@ -334,6 +342,9 @@ public class Customizations extends SettingsPreferenceFragment implements OnPref
                     boolean mSmartChargingSupported = res.getBoolean(
                             com.android.internal.R.bool.config_smartChargingAvailable);
 
+                    boolean mPocketJudgeSupported = res.getBoolean(
+                            com.android.internal.R.bool.config_pocketModeSupported);
+
                     if (!TelephonyUtils.isVoiceCapable(context)) {
                         keys.add(KEY_SHOW_FOURG);
                         keys.add(KEY_USE_OLD_MOBILETYPE);
@@ -344,6 +355,9 @@ public class Customizations extends SettingsPreferenceFragment implements OnPref
 
                     if (!mSmartChargingSupported)
                         keys.add(SMART_CHARGING);
+
+                    if (!mPocketJudgeSupported)
+                        keys.add(POCKET_JUDGE);
 
                     return keys;
 
