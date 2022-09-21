@@ -72,7 +72,15 @@
         android:targetClass="io.chaldeaprjkt.gamespace.settings.SettingsActivity" />
     </Preference>
 
-<!--    <Preference
+    <!-- Smart Charging -->
+    <Preference
+        android:key="smart_charging"
+        android:icon="@drawable/ic_battery_charging_80"
+        android:title="@string/smart_charging_title"
+        android:summary="@string/smart_charging_summary"
+        android:fragment="com.creative.settings.fragments.misc.SmartCharging"/>
+
+<!--<Preference
         android:key="omnijaws_settings"
         android:icon="@drawable/ic_weather"
         android:title="@string/qs_weather_settings_title"
