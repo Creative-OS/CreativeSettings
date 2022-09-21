@@ -465,7 +465,7 @@
 
     <!-- Quick setting categories -->
     <string name="qs_misc_category">Miscellaneous</string>
-    <string name="qs_footer_category">Footer</string>
+    <string name="qs_footer_category">QuickSettings Footer</string>
 
     <!-- QS clock -->
     <string name="qs_clock_title">Clock</string>
@@ -1283,7 +1283,7 @@
     <string name="qs_color_pop">QS Color Pop</string>
     
     <!-- QS tiles layout  -->
-    <string name="qs_layout_category_title">Tiles layout</string>
+    <string name="qs_layout_category_title">QuickSettings Tiles layout</string>
     <string name="qs_tile_label_hide_title">Hide label</string>
     <string name="qs_tile_label_hide_summary">Only show icon in tile</string>
     <string name="qs_tile_label_size_title">Label text size</string>
