@@ -1102,10 +1102,11 @@
     
    <!-- Custom settings dashboard style -->
     <string name="settings_dashboard_style_title">Settings Styles (Requires app restart)</string>
-    <string name="settings_dashboard_style_oos">Sushi style</string>
-    <string name="settings_dashboard_style_rui">Palette style</string>
+    <string name="settings_dashboard_style_oos">Creative style</string>
+    <string name="settings_dashboard_style_rui">Creative Palette style</string>
     <string name="settings_dashboard_style_arc">Arcane style</string>
     <string name="settings_dashboard_style_aosp">AOSP/Pixel style</string>
+    <string name="settings_dashboard_style_mt">Material Palette style</string>
     <string name="settings_base_style_title">Settings background style</string>
     <string name="settings_base_style_summary">Use dual tone background for settings</string>
     <string name="settings_home_style_title">Searchbar style (Requires app restart)</string>
