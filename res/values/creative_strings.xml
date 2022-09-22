@@ -1111,6 +1111,8 @@
     <string name="settings_base_style_summary">Use dual tone background for settings</string>
     <string name="settings_home_style_title">Searchbar style (Requires app restart)</string>
     <string name="settings_home_style_summary">Use AOSP settings homepage style</string>
+    <string name="settings_contextual_messages_title">Contextual homepage messages (Requires app restart)</string>
+    <string name="settings_contextual_messages_summary">Enable random messages that changes according to time.</string>
 
     <!-- Udfps Haptic Feedback -->
     <string name="udfps_haptic_feedback_title">UDFPS haptic feedback</string>

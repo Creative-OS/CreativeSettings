@@ -387,6 +387,13 @@
         android:title="@string/top_level_settings_title">
   
     <com.creative.settings.preferences.SystemSettingSwitchPreference
+          android:key="settings_homepage_messages"
+          android:icon="@drawable/ic_message_fast"
+          android:title="@string/settings_contextual_messages_title"
+          android:summary="@string/settings_contextual_messages_summary"
+          android:defaultValue="false" />
+          
+    <com.creative.settings.preferences.SystemSettingSwitchPreference
           android:key="use_stock_layout"
           android:icon="@drawable/ic_shapes"
           android:title="@string/settings_home_style_title"
