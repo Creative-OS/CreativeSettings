@@ -144,30 +144,30 @@
     <PreferenceCategory
         android:title="@string/notification_material_dismiss_title">
 
-        <com.creative.settings.preferences.SystemSettingSwitchPreference
-            android:key="notification_material_dismiss"
-            android:icon="@drawable/ic_notification_clear_all"
-            android:title="@string/notification_material_dismiss_title"
-            android:summary="@string/notification_material_dismiss_summary"
-            android:defaultValue="false" />
+    <com.creative.settings.preferences.SystemSettingSwitchPreference
+          android:key="notification_material_dismiss"
+          android:icon="@drawable/ic_notification_clear_all"
+          android:title="@string/notification_material_dismiss_title"
+          android:summary="@string/notification_material_dismiss_summary"
+          android:defaultValue="false" />
 
         <com.creative.settings.preferences.SystemSettingSeekBarPreference
-            android:key="notification_material_dismiss_style"
-            android:icon="@drawable/ic_notification_clear_all"
-            android:title="@string/notification_material_dismiss_style_title"
-            android:dependency="notification_material_dismiss"
-            android:defaultValue="0"
-            android:max="9"
-            android:min="0" />
+          android:key="notification_material_dismiss_style"
+          android:icon="@drawable/ic_notification_clear_all"
+          android:title="@string/notification_material_dismiss_style_title"
+          android:dependency="notification_material_dismiss"
+          android:defaultValue="0"
+          android:max="9"
+          android:min="0" />
 
         <com.creative.settings.preferences.SystemSettingSeekBarPreference
-            android:key="notification_material_dismiss_bgstyle"
-            android:icon="@drawable/ic_notification_clear_all"
-            android:title="@string/notification_material_dismiss_bgstyle_title"
-            android:dependency="notification_material_dismiss"
-            android:defaultValue="0"
-            android:max="4"
-            android:min="0" />
+          android:key="notification_material_dismiss_bgstyle"
+          android:icon="@drawable/ic_notification_clear_all"
+          android:title="@string/notification_material_dismiss_bgstyle_title"
+          android:dependency="notification_material_dismiss"
+          android:defaultValue="0"
+          android:max="4"
+          android:min="0" />
 
     </PreferenceCategory>
 
@@ -275,49 +275,49 @@
     <PreferenceCategory 
          android:title="@string/qs_footer_category">
 
-        <com.creative.settings.preferences.SystemSettingSwitchPreference
-            android:key="qs_footer_warnings"
-            android:icon="@drawable/ic_key"
-            android:title="@string/qs_footer_warnings_title"
-            android:summary="@string/qs_footer_warnings_summary"
-            android:defaultValue="true"/>
+    <com.creative.settings.preferences.SystemSettingSwitchPreference
+          android:key="qs_footer_warnings"
+          android:icon="@drawable/ic_key"
+          android:title="@string/qs_footer_warnings_title"
+          android:summary="@string/qs_footer_warnings_summary"
+          android:defaultValue="true"/>
 
-        <com.creative.settings.preferences.SystemSettingSwitchPreference
-            android:key="qs_footer_show_user"
-            android:icon="@drawable/ic_account"
-            android:title="@string/qs_footer_users_icon_title"
-            android:summary="@string/qs_footer_users_icon_summary"
-            android:defaultValue="true" />
+    <com.creative.settings.preferences.SystemSettingSwitchPreference
+          android:key="qs_footer_show_user"
+          android:icon="@drawable/ic_account"
+          android:title="@string/qs_footer_users_icon_title"
+          android:summary="@string/qs_footer_users_icon_summary"
+          android:defaultValue="true" />
 
-        <com.creative.settings.preferences.SystemSettingSwitchPreference
-            android:key="qs_footer_data_usage"
-            android:icon="@drawable/ic_traffic"
-            android:title="@string/qs_footer_datausage_title"
-            android:summary="@string/qs_footer_datausage_summary"
-            android:defaultValue="false" />
+    <com.creative.settings.preferences.SystemSettingSwitchPreference
+          android:key="qs_footer_data_usage"
+          android:icon="@drawable/ic_traffic"
+          android:title="@string/qs_footer_datausage_title"
+          android:summary="@string/qs_footer_datausage_summary"
+          android:defaultValue="false" />
             
-        <com.creative.settings.preferences.SystemSettingSwitchPreference
-            android:key="qs_footer_show_edit"
-            android:icon="@drawable/ic_pencil"
-            android:title="@string/qs_footer_edit_icon_title"
-            android:defaultValue="true" />
+    <com.creative.settings.preferences.SystemSettingSwitchPreference
+          android:key="qs_footer_show_edit"
+          android:icon="@drawable/ic_pencil"
+          android:title="@string/qs_footer_edit_icon_title"
+          android:defaultValue="true" />
 
-        <com.creative.settings.preferences.SystemSettingSwitchPreference
-            android:key="qs_footer_show_power_menu"
-            android:icon="@drawable/ic_power"
-            android:title="@string/qs_footer_show_power_menu_title"
-            android:defaultValue="true" />
+    <com.creative.settings.preferences.SystemSettingSwitchPreference
+          android:key="qs_footer_show_power_menu"
+          android:icon="@drawable/ic_power"
+          android:title="@string/qs_footer_show_power_menu_title"
+          android:defaultValue="true" />
 
-        <com.creative.settings.preferences.SystemSettingSwitchPreference
-            android:key="qs_footer_show_services"
-            android:icon="@drawable/ic_memory"
-            android:title="@string/qs_footer_services_icon_title" />
+    <com.creative.settings.preferences.SystemSettingSwitchPreference
+          android:key="qs_footer_show_services"
+          android:icon="@drawable/ic_memory"
+          android:title="@string/qs_footer_services_icon_title" />
 
-        <com.creative.settings.preferences.SystemSettingSwitchPreference
-            android:key="qs_footer_show_settings"
-            android:icon="@drawable/ic_settings_main"
-            android:title="@string/qs_footer_settings_icon_title"
-            android:defaultValue="true" />
+    <com.creative.settings.preferences.SystemSettingSwitchPreference
+          android:key="qs_footer_show_settings"
+          android:icon="@drawable/ic_settings_main"
+          android:title="@string/qs_footer_settings_icon_title"
+          android:defaultValue="true" />
 
     </PreferenceCategory>
 
@@ -370,6 +370,19 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory
+    	android:key="ripple_effect_category"
+        android:title="@string/enable_fingerprint_ripple_effect_title">.
+
+    <com.creative.settings.preferences.SystemSettingSwitchPreference
+          android:key="enable_ripple_effect"
+          android:icon="@drawable/ic_unlock_outline"
+          android:title="@string/enable_fingerprint_ripple_effect_title"
+          android:summary="@string/enable_fingerprint_ripple_effect_summary"
+          android:defaultValue="true" />
+
+    </PreferenceCategory>
+    
     <PreferenceCategory
         android:title="@string/top_level_settings_title">
   

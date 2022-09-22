@@ -29,6 +29,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.database.ContentObserver;
+import android.hardware.fingerprint.FingerprintManager;
 import android.net.Uri;
 import android.os.Handler;
 import android.content.om.IOverlayManager;
@@ -100,6 +101,7 @@ public class Customizations extends SettingsPreferenceFragment implements OnPref
     private boolean mAlertSliderSupported;
     private boolean mSmartChargingSupported;
     private boolean mPocketJudgeSupported;
+    private FingerprintManager mFingerprintManager;
 
     private Handler mHandler;
     private IOverlayManager mOverlayManager;
@@ -233,6 +235,9 @@ public class Customizations extends SettingsPreferenceFragment implements OnPref
 
 	final PreferenceCategory perfCatPJ = (PreferenceCategory) prefScreen
                 .findPreference("pocket_judge_category");
+                
+	final PreferenceCategory perfCatRipple = (PreferenceCategory) prefScreen
+                .findPreference("ripple_effect_category");
 
         mAlertSliderSupported = getResources().getBoolean(
                 com.android.internal.R.bool.config_hasAlertSlider);         
@@ -241,12 +246,17 @@ public class Customizations extends SettingsPreferenceFragment implements OnPref
         mPocketJudgeSupported = getResources().getBoolean(
                 com.android.internal.R.bool.config_pocketModeSupported);
          
+        mFingerprintManager = (FingerprintManager)
+                getActivity().getSystemService(Context.FINGERPRINT_SERVICE);
+
         if (!mAlertSliderSupported) {
            prefScreen.removePreference(perfCatAS);
         } else if (!mSmartChargingSupported) {
             prefScreen.removePreference(perfCatSM);
         } else if (!mPocketJudgeSupported) {
             prefScreen.removePreference(perfCatPJ);
+        } else if (mFingerprintManager == null || !mFingerprintManager.isHardwareDetected()) {
+           prefScreen.removePreference(perfCatRipple);
         }
     }
 
