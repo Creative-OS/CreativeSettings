@@ -21,19 +21,7 @@
     android:title="@string/creative_customizations_title" >
 
     <PreferenceCategory
-    	android:key="alert_slider_category"
-        android:title="@string/alert_slider_notifications_title">
-        
-    <com.creative.settings.preferences.SystemSettingSwitchPreference
-        android:key="alert_slider_notifications"
-        android:icon="@drawable/ic_light_switch"
-        android:title="@string/alert_slider_notifications_title"
-        android:summary="@string/alert_slider_notifications_summary"
-        android:defaultValue="true" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
+     	android:key="lockscreen_category"
         android:title="@string/lockscreen_title">
 
     <com.creative.settings.preferences.SystemSettingSwitchPreference
@@ -59,6 +47,13 @@
         android:targetPackage="com.android.systemui"
         android:targetClass="com.android.systemui.tuner.LockscreenActivity" />
     </Preference>
+  
+    <com.creative.settings.preferences.SystemSettingSwitchPreference
+          android:key="enable_ripple_effect"
+          android:icon="@drawable/ic_unlock_outline"
+          android:title="@string/enable_fingerprint_ripple_effect_title"
+          android:summary="@string/enable_fingerprint_ripple_effect_summary"
+          android:defaultValue="true" />
 
     <com.creative.settings.preferences.SystemSettingSwitchPreference
         android:key="lockscreen_charge_temp_unit"
@@ -67,9 +62,17 @@
         android:summary="@string/lockscreen_charge_temp_unit_summary"
         android:defaultValue="true" />
 
+<!-- <Preference
+        android:key="udfps_settings"
+        android:icon="@drawable/ic_fp_selector"
+        android:title="@string/udfps_settings_title"
+        android:summary="@string/udfps_settings_summary"
+        android:fragment="com.creative.settings.fragments.lockscreen.UdfpsSettings" /> -->
+
     </PreferenceCategory>
 
     <PreferenceCategory
+    	android:key="misc_category"
         android:title="@string/misc_title">
 
     <!-- Gaming mode -->
@@ -85,6 +88,22 @@
         android:targetClass="io.chaldeaprjkt.gamespace.settings.SettingsActivity" />
     </Preference>
 
+    <!-- Pocket Judge -->
+    <com.creative.settings.preferences.SystemSettingSwitchPreference
+        android:key="pocket_judge"
+        android:icon="@drawable/ic_pocket"
+        android:title="@string/pocket_judge_title"
+        android:summary="@string/pocket_judge_summary"
+        android:defaultValue="false" />
+
+    <!-- Smart Charging -->
+    <Preference
+        android:key="smart_charging"
+        android:icon="@drawable/ic_battery_charging_80"
+        android:title="@string/smart_charging_title"
+        android:summary="@string/smart_charging_summary"
+        android:fragment="com.creative.settings.fragments.misc.SmartCharging"/>
+
 <!--<Preference
         android:key="omnijaws_settings"
         android:icon="@drawable/ic_weather"
@@ -95,7 +114,16 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+    	android:key="notifications_category"
         android:title="@string/notifications_title">
+    
+    <com.creative.settings.preferences.SystemSettingSwitchPreference
+        android:key="alert_slider_notifications"
+        android:icon="@drawable/ic_light_switch"
+        android:title="@string/alert_slider_notifications_title"
+        android:summary="@string/alert_slider_notifications_summary"
+        android:defaultValue="true" />
+
     <com.creative.settings.preferences.SystemSettingSwitchPreference
         android:key="media_artwork_blur_enabled"
         android:icon="@drawable/ic_blur"
@@ -168,20 +196,6 @@
           android:defaultValue="0"
           android:max="4"
           android:min="0" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
-    	android:key="pocket_judge_category"
-        android:title="@string/pocket_judge_title">
-        
-    <!-- Pocket Judge -->
-    <com.creative.settings.preferences.SystemSettingSwitchPreference
-        android:key="pocket_judge"
-        android:icon="@drawable/ic_pocket"
-        android:title="@string/pocket_judge_title"
-        android:summary="@string/pocket_judge_summary"
-        android:defaultValue="false" />
 
     </PreferenceCategory>
 
@@ -371,19 +385,6 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-    	android:key="ripple_effect_category"
-        android:title="@string/enable_fingerprint_ripple_effect_title">.
-
-    <com.creative.settings.preferences.SystemSettingSwitchPreference
-          android:key="enable_ripple_effect"
-          android:icon="@drawable/ic_unlock_outline"
-          android:title="@string/enable_fingerprint_ripple_effect_title"
-          android:summary="@string/enable_fingerprint_ripple_effect_summary"
-          android:defaultValue="true" />
-
-    </PreferenceCategory>
-    
-    <PreferenceCategory
         android:title="@string/top_level_settings_title">
   
     <com.creative.settings.preferences.SystemSettingSwitchPreference
@@ -411,20 +412,6 @@
          android:defaultValue="0" />
 
       </PreferenceCategory>
-
-    <PreferenceCategory
-    	android:key="smart_charging_category"
-        android:title="@string/smart_charging_title">
-        
-    <!-- Smart Charging -->
-    <Preference
-        android:key="smart_charging"
-        android:icon="@drawable/ic_battery_charging_80"
-        android:title="@string/smart_charging_title"
-        android:summary="@string/smart_charging_summary"
-        android:fragment="com.creative.settings.fragments.misc.SmartCharging"/>
-
-    </PreferenceCategory>
 
     <PreferenceCategory
         android:title="@string/statusbar_title">
