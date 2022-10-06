@@ -548,6 +548,17 @@
         android:summary="@string/theme_customization_icon_pack_summary"
         android:fragment="com.creative.settings.fragments.ui.StatusbarIcons"/>
 
+    <!-- QS style -->
+    <com.creative.settings.preferences.SystemSettingListPreference
+         android:key="monet_themes_style"
+         android:icon="@drawable/ic_color_bucket"
+         android:title="@string/monet_styles_title"
+         android:dialogTitle="@string/monet_styles_title"
+         android:entries="@array/monet_styles_entries"
+         android:entryValues="@array/monet_styles_values"
+         android:summary="%s"
+         android:defaultValue="0" />
+
     <!-- Signal icon style -->
     <Preference
         android:key="android.theme.customization.signal_icon"
