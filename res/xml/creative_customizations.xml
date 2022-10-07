@@ -32,6 +32,20 @@
         android:defaultValue="true" />
 
     <com.creative.settings.preferences.SystemSettingSwitchPreference
+        android:key="fp_success_vibrate"
+        android:icon="@drawable/ic_fp"
+        android:title="@string/fp_success_vibrate_title"
+        android:summary="@string/fp_success_vibrate_summary"
+        android:defaultValue="true" />
+
+    <com.creative.settings.preferences.SystemSettingSwitchPreference
+        android:key="fp_error_vibrate"
+        android:icon="@drawable/ic_fp"
+        android:title="@string/fp_error_vibrate_title"
+        android:summary="@string/fp_error_vibrate_summary"
+        android:defaultValue="true" />        
+
+    <com.creative.settings.preferences.SystemSettingSwitchPreference
         android:key="use_secondary_color_clock"
         android:icon="@drawable/ic_lock_clock"
         android:title="@string/lockscreen_clock_color_title"
@@ -48,6 +62,13 @@
         android:targetClass="com.android.systemui.tuner.LockscreenActivity" />
     </Preference>
   
+    <com.creative.settings.preferences.SystemSettingSwitchPreference
+        android:key="lockscreen_enable_power_menu"
+        android:icon="@drawable/ic_power"
+        android:title="@string/lockscreen_enable_power_menu_title"
+        android:summary="@string/lockscreen_enable_power_menu_summary"
+        android:defaultValue="true" />
+
     <com.creative.settings.preferences.SystemSettingSwitchPreference
           android:key="enable_ripple_effect"
           android:icon="@drawable/ic_unlock_outline"
@@ -179,7 +200,7 @@
           android:summary="@string/notification_material_dismiss_summary"
           android:defaultValue="false" />
 
-        <com.creative.settings.preferences.SystemSettingSeekBarPreference
+    <com.creative.settings.preferences.SystemSettingSeekBarPreference
           android:key="notification_material_dismiss_style"
           android:icon="@drawable/ic_notification_clear_all"
           android:title="@string/notification_material_dismiss_style_title"
@@ -188,7 +209,7 @@
           android:max="9"
           android:min="0" />
 
-        <com.creative.settings.preferences.SystemSettingSeekBarPreference
+    <com.creative.settings.preferences.SystemSettingSeekBarPreference
           android:key="notification_material_dismiss_bgstyle"
           android:icon="@drawable/ic_notification_clear_all"
           android:title="@string/notification_material_dismiss_bgstyle_title"

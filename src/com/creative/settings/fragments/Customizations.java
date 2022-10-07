@@ -81,6 +81,8 @@ public class Customizations extends SettingsPreferenceFragment implements OnPref
     private static final String MISC_CATEGORY = "misc_category";
     private static final String NOTIF_CATEGORY = "notifications_category";
     private static final String KEY_RIPPLE_EFFECT = "enable_ripple_effect";
+    private static final String KEY_FP_AUTH = "fp_success_vibrate";
+    private static final String KEY_FP_ERROR = "fp_error_vibrate";
     private static final String ALERT_SLIDER_PREF = "alert_slider_notifications";
     private static final String KEY_SHOW_BRIGHTNESS_SLIDER = "qs_show_brightness_slider";
     private static final String KEY_BRIGHTNESS_SLIDER_POSITION = "qs_brightness_slider_position";
@@ -129,6 +131,8 @@ public class Customizations extends SettingsPreferenceFragment implements OnPref
     private SystemSettingSwitchPreference mSettingsMessages;
     private SystemSettingSwitchPreference mUseStockLayout;
     private SwitchPreference mRippleEffect;
+    private SwitchPreference mFPVibAuth;
+    private SwitchPreference mFPVibError;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -202,9 +206,13 @@ public class Customizations extends SettingsPreferenceFragment implements OnPref
         FingerprintManager mFingerprintManager = (FingerprintManager)
                 getActivity().getSystemService(Context.FINGERPRINT_SERVICE);
         mRippleEffect = findPreference(KEY_RIPPLE_EFFECT);
+        mFPVibAuth = findPreference(KEY_FP_AUTH);
+        mFPVibError = findPreference(KEY_FP_ERROR);
         
         if (mFingerprintManager == null || !mFingerprintManager.isHardwareDetected()) {
             lockscreenCategory.removePreference(mRippleEffect);
+            lockscreenCategory.removePreference(mFPVibAuth);
+            lockscreenCategory.removePreference(mFPVibError);
             }
         }
         
