@@ -527,6 +527,14 @@
         android:summary="@string/location_privacy_indicator_summary"
         android:defaultValue="true" />
 
+    <!-- Show logo on Statusbar -->
+    <Preference
+        android:key="status_bar_logo"
+        android:title="@string/status_bar_logo_title"
+        android:icon="@drawable/ic_google_circles"
+        android:summary="@string/status_bar_logo_summary"
+        android:fragment="com.creative.settings.fragments.statusbar.StatusBarLogo" />
+
     <com.creative.settings.preferences.SystemSettingSwitchPreference
         android:key="enable_camera_privacy_indicator"
         android:icon="@drawable/ic_camera"
