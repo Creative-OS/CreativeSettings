@@ -584,6 +584,14 @@
         android:summary="@string/theme_customization_icon_pack_summary"
         android:fragment="com.creative.settings.fragments.ui.StatusbarIcons"/>
 
+    <!-- Monet Theme Engine -->
+    <Preference
+        android:key="monet_engine"
+        android:icon="@drawable/ic_themes"
+        android:title="@string/monet_title"
+        android:summary="@string/monet_summary"
+        android:fragment="com.creative.settings.fragments.ui.MonetSettings" />
+
     <!-- QS style -->
     <com.creative.settings.preferences.SystemSettingListPreference
          android:key="monet_themes_style"
