@@ -175,6 +175,13 @@
         android:defaultValue="false"
         android:dependency="heads_up_notifications_enabled" />
 
+    <!-- Notification guts kill app button -->
+    <com.creative.settings.preferences.SystemSettingSwitchPreference
+        android:key="notification_guts_kill_app_button"
+        android:icon="@drawable/ic_kill"
+        android:title="@string/notification_guts_kill_app_button_title"
+        android:summary="@string/notification_guts_kill_app_button_summary" />
+
     <com.creative.settings.preferences.SystemSettingSwitchPreference
         android:key="reticker_status"
         android:icon="@drawable/ic_message_fast"
@@ -407,21 +414,21 @@
 
     <PreferenceCategory
         android:title="@string/top_level_settings_title">
-  
+
     <com.creative.settings.preferences.SystemSettingSwitchPreference
           android:key="settings_homepage_messages"
           android:icon="@drawable/ic_message_fast"
           android:title="@string/settings_contextual_messages_title"
           android:summary="@string/settings_contextual_messages_summary"
           android:defaultValue="false" />
-          
+
     <com.creative.settings.preferences.SystemSettingSwitchPreference
           android:key="use_stock_layout"
           android:icon="@drawable/ic_shapes"
           android:title="@string/settings_home_style_title"
           android:summary="@string/settings_home_style_summary"
           android:defaultValue="false" />
-          
+
     <!-- Settings style -->
     <com.creative.settings.preferences.SystemSettingListPreference
          android:key="settings_dashboard_style"
