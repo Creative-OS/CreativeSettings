@@ -67,6 +67,7 @@ import lineageos.preference.LineageSecureSettingListPreference;
 import lineageos.preference.LineageSecureSettingSwitchPreference;
 import lineageos.providers.LineageSettings;
 
+import com.creative.settings.fragments.ui.SmartPixels;
 import com.android.internal.util.creative.CreativeUtils;
 
 import java.util.List;
@@ -97,6 +98,7 @@ public class Customizations extends SettingsPreferenceFragment implements OnPref
     private static final String SETTINGS_DASHBOARD_STYLE = "settings_dashboard_style";
     private static final String SETTINGS_HOMEPAGE_MESSAGES = "settings_homepage_messages";
     private static final String USE_STOCK_LAYOUT = "use_stock_layout";
+    private static final String SMART_PIXELS = "smart_pixels";
 
     private static final String QS_PANEL_STYLE  = "qs_panel_style";
 
@@ -133,6 +135,7 @@ public class Customizations extends SettingsPreferenceFragment implements OnPref
     private SwitchPreference mRippleEffect;
     private SwitchPreference mFPVibAuth;
     private SwitchPreference mFPVibError;
+    private Preference mSmartPixels;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -233,6 +236,12 @@ public class Customizations extends SettingsPreferenceFragment implements OnPref
 	mPocketJudge= findPreference(POCKET_JUDGE);
 	if (!mPocketJudgeSupported)
 	miscCategory.removePreference(mPocketJudge);
+	
+        mSmartPixels = (Preference) prefScreen.findPreference(SMART_PIXELS);
+        boolean mSmartPixelsSupported = getResources().getBoolean(
+                com.android.internal.R.bool.config_supportSmartPixels);
+        if (!mSmartPixelsSupported)
+            prefScreen.removePreference(mSmartPixels);
     }
 
     private CustomSettingsObserver mCustomSettingsObserver = new CustomSettingsObserver(mHandler);
@@ -370,6 +379,11 @@ public class Customizations extends SettingsPreferenceFragment implements OnPref
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> keys = super.getNonIndexableKeys(context);
+
+                    boolean mSmartPixelsSupported = context.getResources().getBoolean(
+                            com.android.internal.R.bool.config_supportSmartPixels);
+                    if (!mSmartPixelsSupported)
+                        keys.add(SMART_PIXELS);
 
                     return keys;
 

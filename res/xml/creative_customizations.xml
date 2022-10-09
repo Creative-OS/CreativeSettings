@@ -125,6 +125,14 @@
         android:summary="@string/smart_charging_summary"
         android:fragment="com.creative.settings.fragments.misc.SmartCharging"/>
 
+    <!-- Smart Pixels -->
+    <Preference
+        android:key="smart_pixels"
+        android:icon="@drawable/ic_smart_pixels"
+        android:title="@string/smart_pixels_title" 
+        android:summary="@string/smart_pixels_summary" 
+        android:fragment="com.creative.settings.fragments.ui.SmartPixels" />
+
 <!--<Preference
         android:key="omnijaws_settings"
         android:icon="@drawable/ic_weather"
