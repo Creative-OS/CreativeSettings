@@ -30,11 +30,15 @@
     <string name="misc_title">Miscellaneous</string>
     <string name="navigation_title">Navigation</string>
     <string name="notifications_title">Notifications</string>
+    <string name="general_notifications_title">General notifications settings</string>
+    <string name="general_qs_settings_title">General QuickSettings customizations</string>
     <string name="quicksettings_title">Quick Settings</string>
-    <string name="sound_title">Sound</string>
+    <string name="sound_title">Sound and vibrations</string>
     <string name="statusbar_title">Status Bar</string>
+    <string name="general_statusbar_title">General StatusBar customizations</string>
     <string name="display_title">Display</string>
-    <string name="ui_title">User Interface</string>
+    <string name="ui_title">User interface</string>
+    <string name="general_ui_title">General user interface theming</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Color Picker</string>
@@ -1151,7 +1155,9 @@
     <string name="buttons_settings_title">Buttons</string>
     <string name="buttons_settings_summary">Tweak hardware buttons</string>
     <string name="lockscreen_settings_title">Lockscreen</string>
+    <string name="general_lockscreen_title">General lockscreen settings</string>
     <string name="lockscreen_settings_summary">Customize lockscreen interface</string>
+    <string name="misc_gen_settings_title">Miscellaneous settings</string>
     <string name="misc_settings_title">Miscellaneous</string>
     <string name="misc_settings_summary">Misc uncategorized stuffs</string>
     <string name="nav_settings_title">Navigation</string>
@@ -1161,7 +1167,7 @@
     <string name="qs_settings_title">QuickSettings</string>
     <string name="qs_settings_summary">Modify QS panel columns, icons and more</string>
     <string name="sound_settings_title">Sound</string>
-    <string name="sound_settings_summary">Lockscreen audio pulse, volume step and more</string>
+    <string name="sound_settings_summary">Sounds and vibrations settings</string>
     <string name="sb_settings_title">StatusBar</string>
     <string name="sb_settings_summary">Customize statusbar icons, layout etc</string>
     <string name="ui_settings_title">User Interface</string>

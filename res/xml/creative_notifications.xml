@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2022 CreativeOS
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:lineage="http://schemas.android.com/apk/res/lineageos.platform"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/notifications_title" >
+    
+    <PreferenceCategory
+    	android:key="notifications_category"
+        android:title="@string/general_notifications_title">
+
+    <com.creative.settings.preferences.SystemSettingSwitchPreference
+        android:key="alert_slider_notifications"
+        android:icon="@drawable/ic_light_switch"
+        android:title="@string/alert_slider_notifications_title"
+        android:summary="@string/alert_slider_notifications_summary"
+        android:defaultValue="true" />
+
+    <com.creative.settings.preferences.SystemSettingSwitchPreference
+        android:key="media_artwork_blur_enabled"
+        android:icon="@drawable/ic_blur"
+        android:title="@string/artwork_media_background_enable_blur_title"
+        android:defaultValue="false" />
+
+    <com.creative.settings.preferences.SystemSettingSeekBarPreference
+        android:key="media_artwork_blur_radius"
+        android:icon="@drawable/ic_custom_seekbar_plus"
+        android:title="@string/artwork_media_background_blur_radius_title"
+        android:dependency="media_artwork_blur_enabled" 
+        android:defaultValue="1"
+        android:max="25"
+        settings:min="1" />
+      
+    <com.creative.settings.preferences.GlobalSettingSwitchPreference
+        android:key="heads_up_notifications_enabled"
+        android:icon="@drawable/ic_headsup"
+        android:title="@string/notification_heads_up_title"
+        android:summary="@string/notification_heads_up_summary"
+        android:defaultValue="true" />
+
+    <com.creative.settings.preferences.SystemSettingSwitchPreference
+        android:key="less_boring_heads_up"
+        android:icon="@drawable/ic_headsup_sleep"
+        android:title="@string/less_boring_heads_up_title"
+        android:summary="@string/less_boring_heads_up_summary"
+        android:defaultValue="false"
+        android:dependency="heads_up_notifications_enabled" />
+
+    <!-- Notification guts kill app button -->
+    <com.creative.settings.preferences.SystemSettingSwitchPreference
+        android:key="notification_guts_kill_app_button"
+        android:icon="@drawable/ic_kill"
+        android:title="@string/notification_guts_kill_app_button_title"
+        android:summary="@string/notification_guts_kill_app_button_summary" />
+
+    <com.creative.settings.preferences.SystemSettingSwitchPreference
+        android:key="reticker_status"
+        android:icon="@drawable/ic_message_fast"
+        android:title="@string/reticker_title"
+        android:summary="@string/reticker_summary" />
+
+    <com.creative.settings.preferences.SystemSettingSwitchPreference
+        android:key="reticker_colored"
+        android:icon="@drawable/ic_message_fast"
+        android:title="@string/reticker_colored_title"
+        android:summary="@string/reticker_colored_summary"
+        android:dependency="reticker_status" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/notification_material_dismiss_title">
+
+    <com.creative.settings.preferences.SystemSettingSwitchPreference
+          android:key="notification_material_dismiss"
+          android:icon="@drawable/ic_notification_clear_all"
+          android:title="@string/notification_material_dismiss_title"
+          android:summary="@string/notification_material_dismiss_summary"
+          android:defaultValue="false" />
+
+    <com.creative.settings.preferences.SystemSettingSeekBarPreference
+          android:key="notification_material_dismiss_style"
+          android:icon="@drawable/ic_notification_clear_all"
+          android:title="@string/notification_material_dismiss_style_title"
+          android:dependency="notification_material_dismiss"
+          android:defaultValue="0"
+          android:max="9"
+          android:min="0" />
+
+    <com.creative.settings.preferences.SystemSettingSeekBarPreference
+          android:key="notification_material_dismiss_bgstyle"
+          android:icon="@drawable/ic_notification_clear_all"
+          android:title="@string/notification_material_dismiss_bgstyle_title"
+          android:dependency="notification_material_dismiss"
+          android:defaultValue="0"
+          android:max="4"
+          android:min="0" />
+
+    </PreferenceCategory>
+</PreferenceScreen>

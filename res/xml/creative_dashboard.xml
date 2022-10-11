@@ -35,13 +35,61 @@
             android:title="@string/about_settings_title"
             android:summary="@string/about_settings_summary"
             android:fragment="com.creative.settings.fragments.About" />
+
+      <!-- Lockscreen -->
+        <Preference
+            android:icon="@drawable/ic_settings_lockscreens"
+            settings:layout="@layout/arc_card_about"
+            android:title="@string/lockscreen_title"
+            android:summary="@string/lockscreen_settings_summary"
+            android:fragment="com.creative.settings.fragments.Lockscreen" />
             
+        <!-- Misc -->
+        <Preference
+            android:icon="@drawable/ic_settings_miscs"
+            settings:layout="@layout/arc_card_about"
+            android:title="@string/misc_settings_title"
+            android:summary="@string/misc_settings_summary"
+            android:fragment="com.creative.settings.fragments.Misc" />
+
+        <!-- Notifications -->
+        <Preference
+            android:icon="@drawable/ic_settings_notifications"
+            settings:layout="@layout/arc_card_about"
+            android:title="@string/notif_settings_title"
+            android:summary="@string/notif_settings_summary"
+            android:fragment="com.creative.settings.fragments.Notifications" />
+
+        <!-- QuickSettings -->
+        <Preference
+            android:icon="@drawable/ic_settings_quicksettings"
+            settings:layout="@layout/arc_card_about"
+            android:title="@string/qs_settings_title"
+            android:summary="@string/qs_settings_summary"
+            android:fragment="com.creative.settings.fragments.QuickSettings" />
+
+        <!-- Statusbar -->
+        <Preference
+            android:icon="@drawable/ic_settings_statusbar"
+            settings:layout="@layout/arc_card_about"
+            android:title="@string/sb_settings_title"
+            android:summary="@string/sb_settings_summary"
+            android:fragment="com.creative.settings.fragments.Statusbar" />
+
+        <!-- Sounds -->
+        <Preference
+            android:icon="@drawable/ic_cellphone_sound"
+            settings:layout="@layout/arc_card_about"
+            android:title="@string/sound_title"
+            android:summary="@string/sound_settings_summary"
+            android:fragment="com.creative.settings.fragments.Sounds" />       
+ 
         <!-- UserInterface -->
         <Preference
-            android:icon="@drawable/ic_settings_ui"
+            android:icon="@drawable/ic_color_bucket"
             settings:layout="@layout/arc_card_about"
-            android:title="@string/creative_kitchen_title"
-            android:summary="@string/creative_kitchen_summary"
-            android:fragment="com.creative.settings.fragments.Customizations" />
+            android:title="@string/ui_title"
+            android:summary="@string/ui_settings_summary"
+            android:fragment="com.creative.settings.fragments.UserInterface" />
 
 </PreferenceScreen> 
