@@ -327,7 +327,7 @@
             android:entries="@array/qs_system_info_entries"
             android:entryValues="@array/qs_system_info_values"
             android:defaultValue="0" />
-       
+
     </PreferenceCategory>
 
     <PreferenceCategory 
@@ -569,6 +569,13 @@
         android:icon="@drawable/ic_counter"
         android:title="@string/statusbar_notif_count_title"
         android:summary="@string/statusbar_notif_count_summary"
+        android:defaultValue="false" />
+
+        <!-- Wi-Fi Standard icon -->
+    <com.creative.settings.preferences.preference.SecureSettingSwitchPreference
+        android:key="show_wifi_standard_icon"
+        android:title="@string/show_wifi_standard_icon_title"
+        android:summary="@string/show_wifi_standard_icon_summary"
         android:defaultValue="false" />
 
     <Preference
