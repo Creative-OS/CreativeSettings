@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Copyright (C) 2016-2021 CreativeOS Android Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/about_settings_title" >
+    
+    <PreferenceCategory
+         android:title="@string/what_is_creative" >
+
+    <Preference
+    	 android:summary="@string/what_is_creative_summary" />
+
+     </PreferenceCategory>
+
+    <PreferenceCategory
+         android:title="@string/creative_terminology" >
+
+    <Preference
+    	 android:summary="@string/creative_terminology_summary" />
+    	 
+     </PreferenceCategory>
+
+    <PreferenceCategory
+         android:title="@string/creative_linkers" >
+         
+    <!-- CreativeOS Changelog -->
+    <Preference
+        android:key="creative_changelog"
+        android:icon="@drawable/ic_changelog"
+        android:title="@string/changelog_creative_title"
+        android:summary="@string/changelog_creative_summary">
+            <intent
+               android:action="android.intent.action.VIEW"
+               android:data="https://raw.githubusercontent.com/Creative-OS/android_vendor_creative/android-13.0/prebuilt/common/etc/Changelog.txt" />
+    </Preference>
+
+    <!-- CreativeOS Translate -->
+    <Preference
+        android:key="creative_translate"
+        android:icon="@drawable/ic_translate"
+        android:title="@string/creative_translate_title"
+        android:summary="@string/creative_translate_summary" />
+
+    <!-- CreativeOS Donate -->
+    <Preference
+        android:key="creative_donate"
+        android:icon="@drawable/ic_donate"
+        android:title="@string/donate_creative_title"
+        android:summary="@string/donate_creative_summary" />
+
+    <!-- CreativeOS Source -->
+    <Preference
+        android:key="creative_source"
+        android:icon="@drawable/ic_source"
+        android:title="@string/creative_source_title"
+        android:summary="@string/creative_source_summary" />
+
+    <!-- CreativeOS Telegram Updates Channel -->
+    <Preference
+        android:key="creative_telegram_channel"
+        android:icon="@drawable/ic_telegram_channel"
+        android:title="@string/creative_telegram_channel_title"
+        android:summary="@string/creative_telegram_channel_summary" />
+
+    <!-- CreativeOS OTA update -->
+    <Preference
+        android:key="system_update_settings"
+        android:title="@string/creative_update_title"
+        android:summary="@string/creative_update_summary"
+        android:icon="@drawable/ic_update"
+        settings:controller="com.android.settings.system.SystemUpdatePreferenceController">
+        <intent android:action="android.settings.SYSTEM_UPDATE_SETTINGS" />
+    </Preference>
+
+    <!-- CreativeOS Drill -->
+    <Preference
+        android:key="creative_drill"
+        android:icon="@drawable/ic_drill"
+        android:title="@string/drill_title"
+        android:summary="@string/drill_summary">
+            <intent
+               android:action="android.intent.action.VIEW"
+               android:data="https://www.xda-developers.com/how-to-take-logs-android/" />
+    </Preference>
+    
+     </PreferenceCategory>
+</PreferenceScreen>
