@@ -459,7 +459,7 @@
         android:summary="@string/show_fourg_icon_summary"
         android:defaultValue="false"/>
 
-    <com.creative.settings.preferences.SystemSettingListPreference
+    <com.creative.settings.preferences.SystemSettingSwitchPreference
         android:key="statusbar_clock_chip"
         android:icon="@drawable/ic_shapes"
         android:title="@string/statusbar_clock_chip_title"
