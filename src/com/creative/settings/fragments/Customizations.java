@@ -77,11 +77,7 @@ import java.util.ArrayList;
 public class Customizations extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
 
     public static final String TAG = "Customizations";
-    
-    private static final String LOCKSCREEN_CATEGORY = "lockscreen_category";
-    private static final String MISC_CATEGORY = "misc_category";
-    private static final String NOTIF_CATEGORY = "notifications_category";
-    private static final String KEY_RIPPLE_EFFECT = "enable_ripple_effect";
+
     private static final String KEY_FP_AUTH = "fp_success_vibrate";
     private static final String KEY_FP_ERROR = "fp_error_vibrate";
     private static final String ALERT_SLIDER_PREF = "alert_slider_notifications";
@@ -110,12 +106,17 @@ public class Customizations extends SettingsPreferenceFragment implements OnPref
     private static final int BATTERY_STYLE_PORTRAIT = 0;
     private static final int BATTERY_STYLE_TEXT = 4;
     private static final int BATTERY_STYLE_HIDDEN = 5;
+    
+    private boolean mAlertSliderSupported;
+    private boolean mSmartChargingSupported;
+    private boolean mPocketJudgeSupported;
+    private FingerprintManager mFingerprintManager;
 
     private Handler mHandler;
     private IOverlayManager mOverlayManager;
     private IOverlayManager mOverlayService;
     private Preference mSmartCharging;
-    private SwitchPreference mPocketJudge;
+    private SystemSettingSwitchPreference mPocketJudge;
     private SystemSettingListPreference mQsStyle;
     private LineageSecureSettingListPreference mShowBrightnessSlider;
     private LineageSecureSettingListPreference mBrightnessSliderPosition;
@@ -128,11 +129,9 @@ public class Customizations extends SettingsPreferenceFragment implements OnPref
     private SystemSettingSwitchPreference mOldMobileType;
     private SystemSettingSwitchPreference mBatteryTextCharging;
     private SystemSettingSwitchPreference mAlertSlider;
-    private Preference mAlertSlider;
     private SystemSettingListPreference mSettingsDashBoardStyle;
     private SystemSettingSwitchPreference mSettingsMessages;
     private SystemSettingSwitchPreference mUseStockLayout;
-    private SwitchPreference mRippleEffect;
     private SwitchPreference mFPVibAuth;
     private SwitchPreference mFPVibError;
     private Preference mSmartPixels;
@@ -202,46 +201,7 @@ public class Customizations extends SettingsPreferenceFragment implements OnPref
         mQsStyle = (SystemSettingListPreference) findPreference(QS_PANEL_STYLE);
         mCustomSettingsObserver.observe();
 
-        PreferenceCategory lockscreenCategory = (PreferenceCategory) findPreference(LOCKSCREEN_CATEGORY);
-        PreferenceCategory miscCategory = (PreferenceCategory) findPreference(MISC_CATEGORY);
-        PreferenceCategory notifCategory = (PreferenceCategory) findPreference(NOTIF_CATEGORY);
-
-        FingerprintManager mFingerprintManager = (FingerprintManager)
-                getActivity().getSystemService(Context.FINGERPRINT_SERVICE);
-        mRippleEffect = findPreference(KEY_RIPPLE_EFFECT);
-        mFPVibAuth = findPreference(KEY_FP_AUTH);
-        mFPVibError = findPreference(KEY_FP_ERROR);
-        
-        if (mFingerprintManager == null || !mFingerprintManager.isHardwareDetected()) {
-            lockscreenCategory.removePreference(mRippleEffect);
-            lockscreenCategory.removePreference(mFPVibAuth);
-            lockscreenCategory.removePreference(mFPVibError);
-            }
-        }
-        
-        boolean mAlertSliderSupported = getResources().getBoolean(
-                com.android.internal.R.bool.config_hasAlertSlider);
-	mAlertSlider = findPreference(ALERT_SLIDER_PREF);
-        if (!mAlertSliderSupported)
-           notifCategory.removePreference(mAlertSlider);
-        
-        boolean mSmartChargingSupported = getResources().getBoolean(
-                com.android.internal.R.bool.config_smartChargingAvailable);
-	mSmartCharging = findPreference(SMART_CHARGING);
-	if (!mSmartChargingSupported)
-	miscCategory.removePreference(mSmartCharging);
-	
-        boolean mPocketJudgeSupported = getResources().getBoolean(
-                com.android.internal.R.bool.config_pocketModeSupported);
-	mPocketJudge= findPreference(POCKET_JUDGE);
-	if (!mPocketJudgeSupported)
-	miscCategory.removePreference(mPocketJudge);
-	
-        mSmartPixels = (Preference) prefScreen.findPreference(SMART_PIXELS);
-        boolean mSmartPixelsSupported = getResources().getBoolean(
-                com.android.internal.R.bool.config_supportSmartPixels);
-        if (!mSmartPixelsSupported)
-            prefScreen.removePreference(mSmartPixels);
+	checkIfPreferenceIsSupported();
     }
 
     private CustomSettingsObserver mCustomSettingsObserver = new CustomSettingsObserver(mHandler);
@@ -293,6 +253,42 @@ public class Customizations extends SettingsPreferenceFragment implements OnPref
             return true;
         }
         return false;
+    }
+
+    private void checkIfPreferenceIsSupported() {
+	final PreferenceScreen prefScreen = getPreferenceScreen();   
+
+	final PreferenceCategory perfCatAS = (PreferenceCategory) prefScreen
+                .findPreference("alert_slider_category");
+
+	final PreferenceCategory perfCatSM = (PreferenceCategory) prefScreen
+                .findPreference("smart_charging_category");
+
+	final PreferenceCategory perfCatPJ = (PreferenceCategory) prefScreen
+                .findPreference("pocket_judge_category");
+                
+	final PreferenceCategory perfCatRipple = (PreferenceCategory) prefScreen
+                .findPreference("ripple_effect_category");
+
+        mAlertSliderSupported = getResources().getBoolean(
+                com.android.internal.R.bool.config_hasAlertSlider);         
+        mSmartChargingSupported = getResources().getBoolean(
+                com.android.internal.R.bool.config_smartChargingAvailable);
+        mPocketJudgeSupported = getResources().getBoolean(
+                com.android.internal.R.bool.config_pocketModeSupported);
+         
+        mFingerprintManager = (FingerprintManager)
+                getActivity().getSystemService(Context.FINGERPRINT_SERVICE);
+
+        if (!mAlertSliderSupported) {
+           prefScreen.removePreference(perfCatAS);
+        } else if (!mSmartChargingSupported) {
+            prefScreen.removePreference(perfCatSM);
+        } else if (!mPocketJudgeSupported) {
+            prefScreen.removePreference(perfCatPJ);
+        } else if (mFingerprintManager == null || !mFingerprintManager.isHardwareDetected()) {
+           prefScreen.removePreference(perfCatRipple);
+        }
     }
 
     private void updateQsStyle() {
